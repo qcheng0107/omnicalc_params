@@ -44,5 +44,12 @@ class CalculationsController < ApplicationController
       
       render("calculations/square_form_template.html.erb")  
     end
+    
+    def process_square
+     
+      @user_number = params["the_user_number"].to_i      #convert string to integer
+        @squared_number = @user_number**2        #access element in a hash
+     render("calculations/square_results_template.html.erb")   
+    end
 
 end
