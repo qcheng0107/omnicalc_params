@@ -43,15 +43,61 @@ class CalculationsController < ApplicationController
     end
 
     def square_form
-      
+        
       render("calculations/square_form_template.html.erb")  
     end
     
     def process_square
      
-      @user_number = params["the_user_number"].to_i      #convert string to integer
-        @squared_number = @user_number**2        #access element in a hash
+      @user_number = params["the_user_number"].to_i      
+        @squared_number = @user_number**2        
      render("calculations/square_results_template.html.erb")   
+    end
+    
+    def square_root_form
+        
+      render("calculations/square_root_form_template.html.erb")  
+    end
+
+    def process_square_root
+     
+       @user_number = params["the_user_number"].to_i      
+        @square_root_number = @user_number**0.5
+        
+     render("calculations/square_root_results_template.html.erb")   
+    end
+
+    def payment_form
+        
+      render("calculations/payment_form_template.html.erb")  
+    end
+
+    def process_payment
+     
+        @percent = params["the_user_apr"].to_i
+        @apr = @percent/10000
+        @mpr = @apr/12
+        @years = params["the_user_years"].to_i
+        @months = @years*12
+        @principal = params["the_user_principal"].to_i
+        
+        @payment = @mpr*@principal/(1-(1+@mpr)**(-@months))
+        
+     render("calculations/square_root_results_template.html.erb")   
+    end
+
+    def random_form
+        
+      render("calculations/random_form_template.html.erb")  
+    end
+
+    def process_random
+     
+       @min = params["the_user_min"].to_i 
+        @max = params["the_user_max"].to_i
+        @rand = rand(@min...@max)
+        
+     render("calculations/random_results_template.html.erb")   
     end
 
 end
