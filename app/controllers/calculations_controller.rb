@@ -22,20 +22,22 @@ class CalculationsController < ApplicationController
     def flex_payment
         
         @percent = params["basis_points"].to_i
-        @apr = @percent.to_percentage
+        @apr = @percent/10000
         @mpr = @apr/12
         @years = params["number_of_years"].to_i
+        @months = @years*12
         @principal = params["present_value"].to_i
         
-        @payment = @mpr*@principal/(1-(1+@mpr)**(-12*@years))
+        @payment = @mpr*@principal/(1-(1+@mpr)**(-@months))
         
         render("calculations/flexible_payment_template.html.erb")
     end
     
     def flex_random
         
-        @user_number = params["a_number"].to_i      #convert string to integer
-        @squared_number = @user_number**2        #access element in a hash
+        @min = params["min"].to_i 
+        @max = params["max"].to_i
+        @rand = rand(@min...@max)        
         
         render("calculations/flexible_random_template.html.erb")
     end
