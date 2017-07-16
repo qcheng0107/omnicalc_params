@@ -1,0 +1,32 @@
+<h1>Word Count Results</h1>
+
+<dl>
+    <dt>
+        Numbers
+    </dt>
+    <dd>
+        <%= @numbers %>
+    </dd>
+    <dt>
+        Count
+    </dt>
+    <dd>
+        <%= @count %>
+    </dd>
+    <dt>
+        Character Count (without spaces)
+    </dt>
+    <dd>
+        <%= @character_count_without_spaces %>
+    </dd>
+    <dt>
+        Occurrences of <%= @special_word %> 
+    </dt>
+    <dd>
+        <%= @occurrences %>
+    </dd>
+</dl>     
+
+<a href = "/stats/new">
+    Process more text
+</a>

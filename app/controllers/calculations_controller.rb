@@ -100,4 +100,75 @@ class CalculationsController < ApplicationController
      render("calculations/random_results_template.html.erb")   
     end
 
+    def word_form
+        
+      render("calculations/word_form_template.html.erb")  
+    end
+
+    def process_word
+     
+        @text = params["the_user_text"]
+        @special_word = params["the_user_word"]
+        @word_count = @text.split.count
+        @character_count_with_spaces = @text.length
+        @character_count_without_spaces = @text.gsub(/\s+/, "").length
+        @occurrences = @text.split.count (@special_word)
+        
+     render("calculations/word_results_template.html.erb")   
+    end
+
+    def stats_form
+        
+      render("calculations/stats_form_template.html.erb")  
+    end
+
+    def process_stats
+     
+        @numbers = params["the_user_number"].gsub(',', '').split.map(&:to_f)
+
+        @sorted_numbers = @numbers.sort
+
+    @count = @numbers.count
+
+    @minimum = @numbers.min
+
+    @maximum = @numbers.max
+
+    @range = @numbers.max - @numbers.min
+
+    if @count.to_i.even? 
+      @median = (@sorted_numbers[@count/2]+@sorted_numbers[@count/2-1])/2
+      else
+        @median = @sorted_numbers[@count/2]
+    end
+
+    @sum = @numbers.sum
+
+    @mean = @sum/@count
+    
+    v = []
+    @numbers. each do |num|
+      correlated_mean_diff = (num - @mean) ** 2 / @count
+      v.push(correlated_mean_diff)
+    end
+    @variance = v.sum
+
+    @standard_deviation = @variance ** 0.5
+
+    prelim_mode = 0
+    mode_count = 0
+    
+    @numbers.each do |numb|
+      if @numbers.count(numb) > mode_count
+        prelim_mode = numb
+        mode_count = @numbers.count(numb)
+      end
+    end
+    @mode = prelim_mode
+    
+
+        
+    render("calculations/stats_results_template.html.erb")   
+    end
+
 end
