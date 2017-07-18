@@ -5,7 +5,7 @@
         APR
     </dt>
     <dd>
-        <%= @apr %>
+        <%= number_to_percentage(@apr, precision:4) %>
     </dd>
     <dt>
         Number of years
@@ -17,13 +17,13 @@
         Principal
     </dt>
     <dd>
-        <%= @principal %>
+        <%= number_to_currency(@principal) %>
     </dd>
     <dt>
         Payment
     </dt>
     <dd>
-        <%= @payment %>
+        <%= number_to_currency(@payment) %>
     </dd>
 </dl>     
 

@@ -21,7 +21,7 @@ class CalculationsController < ApplicationController
 
     def flex_payment
         
-        @percent = params["basis_points"].to_i
+        @percent = params["basis_points"].to_f
         @apr = @percent/10000
         @mpr = @apr/12
         @years = params["number_of_years"].to_i
@@ -74,8 +74,8 @@ class CalculationsController < ApplicationController
 
     def process_payment
      
-        @percent = params["the_user_apr"].to_i
-        @apr = @percent/10000
+        @percent = params["the_user_apr"].to_f
+        @apr = @percent/100
         @mpr = @apr/12
         @years = params["the_user_years"].to_i
         @months = @years*12
@@ -83,7 +83,7 @@ class CalculationsController < ApplicationController
         
         @payment = @mpr*@principal/(1-(1+@mpr)**(-@months))
         
-     render("calculations/square_root_results_template.html.erb")   
+     render("calculations/payment_results_template.html.erb")   
     end
 
     def random_form
